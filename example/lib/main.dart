@@ -30,15 +30,26 @@ class FTimelineExample extends StatelessWidget {
       ),
     ),
     MyTimeLineModel(
-      title: 'Taken',
+      title: 'Processing',
       content: Center(
-        child: Text('Your order is taken'),
+        child: Text('Your order is being processed'),
+      ),
+    ),
+    MyTimeLineModel(
+      title: 'Packing',
+      content: Center(
+        child: Text('Hold on,We are making ready your product.'),
+      ),
+    ),
+    MyTimeLineModel(
+      title: 'Way to',
+      content: Center(
+        child: Text('Just some moments. We are on the way'),
       ),
     ),
   ];
   @override
   Widget build(BuildContext context) {
-    return MyTimeLine(
-        timelines: timeLineModels, timeLineState: TimeLineState.processing);
+    return MyTimeLine(timelines: timeLineModels, doneTillIndex: 0);
   }
 }

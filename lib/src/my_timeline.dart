@@ -10,6 +10,7 @@ enum BubblePosition {
   start,
   end,
 }
+
 enum TimeLineState {
   confirmed,
   processing,
@@ -22,11 +23,13 @@ class MyTimeLine extends StatefulWidget {
   final List<MyTimeLineModel> timelines;
 
   /// There can be several types of [TimeLineState]. You can find them just a bit above.
-  final TimeLineState timeLineState;
+  final int doneTillIndex;
 
   const MyTimeLine(
-      {Key? key, required this.timelines, required this.timeLineState})
-      : super(key: key);
+      {Key? key, required this.timelines, required this.doneTillIndex})
+      : assert(doneTillIndex < timelines.length,
+            'doneTillIndex cannot be greater than or equal to the length of timelines'),
+        super(key: key);
 
   @override
   State<MyTimeLine> createState() => _MyTimeLineState();
@@ -37,12 +40,20 @@ class _MyTimeLineState extends State<MyTimeLine> {
 
   @override
   void initState() {
-    if (!(widget.timeLineState == TimeLineState.shipping ||
-        widget.timeLineState == TimeLineState.delivered)) return;
+    if (!(widget.doneTillIndex == 0 ||
+        widget.doneTillIndex == widget.timelines.length)) return;
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
 
     super.initState();
   }
+
+  //   @override
+  // void didUpdateWidget(covariant MyTimeLine oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (oldWidget.child != widget.child) {
+  //     setState(() {});
+  //   }
+  // }
 
   Widget _buildBubble(bool _isActive) {
     return Container(
@@ -191,9 +202,7 @@ class _MyTimeLineState extends State<MyTimeLine> {
           height: Get.height * 0.13,
           child: _buildHeaderPart(
             widget.timelines,
-            getIndex(
-              widget.timeLineState,
-            ),
+            widget.doneTillIndex,
           ),
         ),
         SizedBox(
@@ -201,7 +210,7 @@ class _MyTimeLineState extends State<MyTimeLine> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              widget.timelines[getIndex(widget.timeLineState)].content,
+              widget.timelines[widget.doneTillIndex].content,
             ],
           ),
         ),
