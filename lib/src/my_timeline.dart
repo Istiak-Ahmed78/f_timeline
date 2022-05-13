@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 part 'model/my_time_line_model.dart';
@@ -177,9 +176,9 @@ class _MyTimeLineState extends State<MyTimeLine> {
     );
   }
 
-  BubblePosition getBubblePosition(int currentIndex, int legnth) {
+  BubblePosition getBubblePosition(int currentIndex, int length) {
     if (currentIndex == 0) return BubblePosition.start;
-    if (currentIndex == (legnth - 1)) return BubblePosition.end;
+    if (currentIndex == (length - 1)) return BubblePosition.end;
     return BubblePosition.middle;
   }
 
