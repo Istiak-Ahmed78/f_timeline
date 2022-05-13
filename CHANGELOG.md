@@ -1,3 +1,8 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+- Initial release and setup.
+
+## 0.5.0
+
+- Initial setup
+- Code clearance
