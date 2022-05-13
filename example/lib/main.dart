@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       home: Scaffold(
         body: FTimelineExample(),
       ),
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class FTimelineExample extends StatelessWidget {
-  FTimelineExample({Key? key}) : super(key: key);
+  const FTimelineExample({Key? key}) : super(key: key);
   final List<MyTimeLineModel> timeLineModels = const [
     MyTimeLineModel(
       title: 'Taken',
