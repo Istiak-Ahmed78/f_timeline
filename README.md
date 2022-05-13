@@ -63,4 +63,4 @@ MyTimeLine(timelines: const[
   ```
   Check the [Example](https://github.com/Istiak-Ahmed78/f_timeline/blob/master/example/lib/main.dart) 
   
-  Deverlopers are welomed to contribute
+
