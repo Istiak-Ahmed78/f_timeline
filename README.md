@@ -1,18 +1,66 @@
 # f_timeline
 
-A new flutter plugin project.
 
-## Getting Started
+<p align="center">
+  <a href="https://pub.dartlang.org/packages/f-timeline">
+    <img src="https://img.shields.io/pub/v/f-timeline.svg" alt="Pub" />
+  </a>
+ 
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" />
+  </a>
+</p>
+A flutter package aming to showing timeline in Flutter
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## Demo screenshot
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://user-images.githubusercontent.com/68919043/168297212-f04ffbd1-5b46-4199-84da-99fd812fa173.jpg" width="200" height="400" />
 
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` under the same
-directory. You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+## Installation
+
+#### Depend on it:
+``` yaml
+dependencies:
+  f_timeline: 0.5.0
+```
+#### Get packages
+``` console
+$ flutter pub get
+```
+
+#### Import the package in your project
+
+`import 'package:timelines/timelines.dart';`
+
+#### Usage
+``` dart
+MyTimeLine(timelines: const[
+    MyTimeLineModel(
+      title: 'Taken',
+      content: Center(
+        child: Text('Your order is taken'),
+      ),
+    ),
+    MyTimeLineModel(
+      title: 'Processing',
+      content: Center(
+        child: Text('Your order is being processed'),
+      ),
+    ),
+    MyTimeLineModel(
+      title: 'Packing',
+      content: Center(
+        child: Text('Hold on,We are making ready your product.'),
+      ),
+    ),
+    MyTimeLineModel(
+      title: 'Way to',
+      content: Center(
+        child: Text('Just some moments. We are on the way'),
+      ),
+    ),
+  ], doneTillIndex: 0);
+  ```
+  Check the [Example](https://github.com/Istiak-Ahmed78/f_timeline/blob/master/example/lib/main.dart) 
+  
+  Deverlopers are welomed to contribute
