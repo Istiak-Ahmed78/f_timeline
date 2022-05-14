@@ -1,23 +1,33 @@
-// import 'package:flutter/services.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:f_timeline/f_timeline.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:f_timeline/f_timeline.dart';
 
-// void main() {
-//   const MethodChannel channel = MethodChannel('f_timeline');
+void main() {
+  List<FTimeLineModel> _timelines = const [
+    FTimeLineModel(
+        title: 'Taken',
+        content: Center(
+          child: Text('Your order is taken'),
+        )),
+    FTimeLineModel(
+        title: 'Cooking',
+        content: Center(child: Text('Your is being cooked.'))),
+    FTimeLineModel(
+        title: 'Delivering',
+        content: Center(child: Text('Your is on the way.'))),
+  ];
+  testWidgets('Test main Widget', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: FTimeline(timelines: _timelines, doneTillIndex: 0),
+      ),
+    ));
 
-//   TestWidgetsFlutterBinding.ensureInitialized();
-
-//   setUp(() {
-//     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-//       return '42';
-//     });
-//   });
-
-//   tearDown(() {
-//     channel.setMockMethodCallHandler(null);
-//   });
-
-//   test('getPlatformVersion', () async {
-//     expect(await FTimeline.platformVersion, '42');
-//   });
-// }
+    await tester.pump();
+    for (final i in _timelines) {
+      final textfinder = find.text(i.title);
+      expect(textfinder, findsOneWidget);
+    }
+  });
+}

@@ -98,24 +98,26 @@ class _FTimelineState extends State<FTimeline> {
         );
         break;
       case BubblePosition.end:
-        child = Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              children: [
-                _buildConnector(isActive),
-                _buildBubble(isActive),
-                const SizedBox(
-                  width: 15,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            _buildTimeLineText(model.title, isActive)
-          ],
+        child = SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                children: [
+                  _buildConnector(isActive),
+                  _buildBubble(isActive),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              _buildTimeLineText(model.title, isActive)
+            ],
+          ),
         );
         break;
       default:
