@@ -1,6 +1,5 @@
 import 'package:f_timeline/f_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return const MaterialApp(
       home: Scaffold(
         body: FTimelineExample(),
       ),
@@ -22,26 +21,26 @@ class MyApp extends StatelessWidget {
 
 class FTimelineExample extends StatelessWidget {
   const FTimelineExample({Key? key}) : super(key: key);
-  final List<MyTimeLineModel> timeLineModels = const [
-    MyTimeLineModel(
+  final List<FTimeLineModel> timeLineModels = const [
+    FTimeLineModel(
       title: 'Taken',
       content: Center(
         child: Text('Your order is taken'),
       ),
     ),
-    MyTimeLineModel(
+    FTimeLineModel(
       title: 'Processing',
       content: Center(
         child: Text('Your order is being processed'),
       ),
     ),
-    MyTimeLineModel(
+    FTimeLineModel(
       title: 'Packing',
       content: Center(
         child: Text('Hold on,We are making ready your product.'),
       ),
     ),
-    MyTimeLineModel(
+    FTimeLineModel(
       title: 'Way to',
       content: Center(
         child: Text('Just some moments. We are on the way'),
@@ -50,6 +49,6 @@ class FTimelineExample extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return MyTimeLine(timelines: timeLineModels, doneTillIndex: 0);
+    return FTimeline(timelines: timeLineModels, doneTillIndex: 0);
   }
 }
