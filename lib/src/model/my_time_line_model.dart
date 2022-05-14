@@ -1,7 +1,7 @@
 part of '../my_timeline.dart';
 
-class MyTimeLineModel {
+class FTimeLineModel {
   final String title;
   final Widget content;
-  const MyTimeLineModel({required this.title, required this.content});
+  const FTimeLineModel({required this.title, required this.content});
 }

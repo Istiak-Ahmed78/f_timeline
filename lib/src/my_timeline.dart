@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 part 'model/my_time_line_model.dart';
 
@@ -10,49 +9,37 @@ enum BubblePosition {
   end,
 }
 
-enum TimeLineState {
-  confirmed,
-  processing,
-  shipping,
-  delivered,
-}
-
-class MyTimeLine extends StatefulWidget {
-  /// Pass a list of [MyTimeLineModel].
-  final List<MyTimeLineModel> timelines;
+class FTimeline extends StatefulWidget {
+  /// Pass a list of [FTimeLineModel].
+  final List<FTimeLineModel> timelines;
 
   /// There can be several types of [TimeLineState]. You can find them just a bit above.
   final int doneTillIndex;
 
-  const MyTimeLine(
+  const FTimeline(
       {Key? key, required this.timelines, required this.doneTillIndex})
       : assert(doneTillIndex < timelines.length,
             'doneTillIndex cannot be greater than or equal to the length of timelines'),
         super(key: key);
 
   @override
-  State<MyTimeLine> createState() => _MyTimeLineState();
+  State<FTimeline> createState() => _FTimelineState();
 }
 
-class _MyTimeLineState extends State<MyTimeLine> {
+class _FTimelineState extends State<FTimeline> {
   late ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     if (!(widget.doneTillIndex == 0 ||
-        widget.doneTillIndex == widget.timelines.length)) return;
+            widget.doneTillIndex == widget.timelines.length) ||
+        !scrollController.hasClients) return;
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
 
     super.initState();
   }
 
-  //   @override
-  // void didUpdateWidget(covariant MyTimeLine oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
-  //   if (oldWidget.child != widget.child) {
-  //     setState(() {});
-  //   }
-  // }
+  Size _getSize(BuildContext context) => MediaQuery.of(context).size;
 
   Widget _buildBubble(bool _isActive) {
     return Container(
@@ -83,7 +70,7 @@ class _MyTimeLineState extends State<MyTimeLine> {
   }
 
   Widget _buildEveryTile(
-      {required MyTimeLineModel model,
+      {required FTimeLineModel model,
       required BubblePosition position,
       required bool isActive,
       required bool isFill}) {
@@ -111,24 +98,26 @@ class _MyTimeLineState extends State<MyTimeLine> {
         );
         break;
       case BubblePosition.end:
-        child = Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              children: [
-                _buildConnector(isActive),
-                _buildBubble(isActive),
-                const SizedBox(
-                  width: 15,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            _buildTimeLineText(model.title, isActive)
-          ],
+        child = SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                children: [
+                  _buildConnector(isActive),
+                  _buildBubble(isActive),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              _buildTimeLineText(model.title, isActive)
+            ],
+          ),
         );
         break;
       default:
@@ -154,7 +143,7 @@ class _MyTimeLineState extends State<MyTimeLine> {
   }
 
   Widget _buildHeaderPart(
-    List<MyTimeLineModel> timelines,
+    List<FTimeLineModel> timelines,
     int currentIndex,
   ) {
     return Padding(
@@ -182,13 +171,6 @@ class _MyTimeLineState extends State<MyTimeLine> {
     return BubblePosition.middle;
   }
 
-  int getIndex(TimeLineState timeLineState) {
-    if (timeLineState == TimeLineState.delivered) return 3;
-    if (timeLineState == TimeLineState.shipping) return 2;
-    if (timeLineState == TimeLineState.processing) return 1;
-    return 0;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -198,14 +180,14 @@ class _MyTimeLineState extends State<MyTimeLine> {
       ),
       child: Column(children: [
         SizedBox(
-          height: Get.height * 0.13,
+          height: _getSize(context).height * 0.13,
           child: _buildHeaderPart(
             widget.timelines,
             widget.doneTillIndex,
           ),
         ),
         SizedBox(
-          height: Get.height * 0.707,
+          height: _getSize(context).height * 0.707,
           child: ListView(
             shrinkWrap: true,
             children: [
