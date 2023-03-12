@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" />
   </a>
 </p>
-A flutter package aming to showing timeline in Flutter
+A flutter package aiming to showing timeline in Flutter
 
 ## Demo screenshot
 
